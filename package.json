@@ -1,0 +1,11 @@
+{
+  "name": "global-server",
+  "version": "1.0.0",
+  "description": "Backend service for global neutralization app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tarun Singh",
+  "license": "ISC"
+}

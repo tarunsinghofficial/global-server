@@ -46,3 +46,24 @@ export const signIn = async (req, res) => {
     });
   }
 };
+export const isAuthenticated=async(req,res)=>{
+  try {
+      const token=req.headers['x-access-token'];
+       const response=await  userService.isAuthenticated(token);
+       return res.status(200).json({
+          message:"User is authenticated and token is valid",
+          data:response,
+          success:true,
+          err:{}
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+          message:"Something Went Wrong In Controller Layer",
+          data:{},
+          success:false,
+          err:error
+      });
+      
+  }
+}

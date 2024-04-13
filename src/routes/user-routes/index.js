@@ -3,6 +3,6 @@ import express from 'express';
 
 const router=express.Router();
 
-//todo
+//user routes
 
 export default router;

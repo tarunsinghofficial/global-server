@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-
+import CarbonFootprint from './carbonfootprint-model.js';
+import {calculateCarbonFootprint} from "../utils/carbon-footprint-calculator.js";
 const lifestyleSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -43,6 +44,35 @@ const lifestyleSchema = new mongoose.Schema({
     },
 
 },{timestamps:true});
+
+lifestyleSchema.post('save', async function() {
+    const lifestyleData = this;
+
+    try {
+        // Calculate carbon footprint
+        const carbonFootprintValue = calculateCarbonFootprint(lifestyleData);
+
+        // Check if a carbon footprint entry already exists for the user
+        const existingCarbonFootprint = await CarbonFootprint.findOne({ userId: lifestyleData.userId });
+
+        if (existingCarbonFootprint) {
+            // Update existing carbon footprint entry
+            existingCarbonFootprint.carbonFootprint = carbonFootprintValue;
+            await existingCarbonFootprint.save();
+            console.log('Carbon footprint updated successfully');
+        } else {
+            // Create new carbon footprint entry
+            const carbonFootprintEntry = new CarbonFootprint({
+                userId: lifestyleData.userId,
+                carbonFootprint: carbonFootprintValue
+            });
+            await carbonFootprintEntry.save();
+            console.log('Carbon footprint saved successfully');
+        }
+    } catch (error) {
+        console.error('Error calculating and saving carbon footprint:', error);
+    }
+});
 
 const Lifestyle = mongoose.model('Lifestyle', lifestyleSchema);
 

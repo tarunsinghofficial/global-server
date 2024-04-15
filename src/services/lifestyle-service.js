@@ -15,6 +15,16 @@ class LifestyleService{
       throw { error };
     }
   }
+  async getOne(data) {
+    try {
+      const user = await this.lifestyleRepository.getOne(data);
+      return user;
+    } catch (error) {
+      console.log("Something Went Wrong In Service Layer");
+      console.log(error);
+      throw { error };
+    }
+  }
   
 }
 

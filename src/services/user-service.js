@@ -1,11 +1,13 @@
 import jwt from 'jsonwebtoken';
 import UserRepository from '../repository/user-repository.js';
+import CarbonFootprintRepository from '../repository/carbonfootprint-repository.js';
 import { JWT_KEY } from '../config/server-config.js';
 import bcrypt from 'bcrypt';
 
 class UserService {
   constructor() {
     this.userRepository = new UserRepository();
+    this.carbonFootprintRepository = new CarbonFootprintRepository();
   }
 
   async create(data) {
@@ -107,6 +109,22 @@ class UserService {
           console.log(error);
           throw{error};
       }
+  }
+  async get(id)
+  {
+    try {
+      const user=await this.userRepository.get(id);
+      //const footprint=await this.carbonFootprintRepository.get(id);
+      const newJson = {
+        email: user.email,
+        username: user.username
+      };
+      return newJson;
+    } catch (error) {
+      console.log("Something Went wrong");
+      console.log(error);
+      throw{error};
+    }
   }
   async isAuthenticatedUserAuth(token)
   {

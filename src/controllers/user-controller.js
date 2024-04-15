@@ -72,3 +72,25 @@ export const isAuthenticated=async(req,res)=>{
       
   }
 }
+export const get=async(req,res)=>{
+  try {
+      const userId=req.body.id;
+       const response=await  userService.get(userId);
+       return res.status(200).json({
+          message:"successfully get user by id",
+          data:response,
+          success:true,
+          err:{}
+      });
+  } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+          message:"Something Went Wrong In Controller Layer",
+          data:{},
+          success:false,
+          err:error
+      });
+      
+  }
+}
+

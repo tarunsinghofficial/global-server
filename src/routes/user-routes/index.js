@@ -1,7 +1,6 @@
 import express from 'express';
 import {create,signIn,isAuthenticated} from "../../controllers/user-controller.js";
-import {validateSignUpUserAuth,validateSignInUserAuth} from '../../middlewares/auth-request-validators.js';
-
+import {validateSignUpUserAuth,validateSignInUserAuth} from '../../middlewares/auth-request-validators.js'; 
 const router=express.Router();
 
 //user routes

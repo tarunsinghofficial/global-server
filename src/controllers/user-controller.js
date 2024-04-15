@@ -48,7 +48,7 @@ export const signIn = async (req, res) => {
 };
 export const isAuthenticated=async(req,res)=>{
   try {
-      const token=req.headers['x-access-token'];
+      const token=req.body.jwt_token;
        const response=await  userService.isAuthenticated(token);
        return res.status(200).json({
           message:"User is authenticated and token is valid",

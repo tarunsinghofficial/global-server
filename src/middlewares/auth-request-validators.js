@@ -1,3 +1,5 @@
+ import UserService from "../services/user-service.js";
+ const userService = new UserService();
  export const validateSignInUserAuth=(req,res,next)=>{
     if(!req.body.email || !req.body.password)
     {
@@ -25,3 +27,17 @@ export const validateSignUpUserAuth=(req,res,next)=>{
     next();
 }
 
+export const isAuthenticatedUserAuth=async (req,res,next)=>{
+       const response=await userService.isAuthenticatedUserAuth(req.body.jwt_token);
+      if(!response)
+      {
+        return res.status(400).json({
+            success:false,
+            data:{},
+            message:"Something Went Wrong",
+            err:"Token Not Valid or User Not present"
+        });
+      }
+      next();
+
+}

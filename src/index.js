@@ -10,7 +10,7 @@ app.use(cors({
     origin: "*",
     credentials: true,
     methods: ["GET", "POST", "PUT",]
-}))
+}));
 
 app.use(express.json());
 app.use('/api',ApiRoutes);

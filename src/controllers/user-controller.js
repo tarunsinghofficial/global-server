@@ -1,7 +1,7 @@
 import UserService from '../services/user-service.js';
-
+import UserRepository from '../repository/user-repository.js';
 const userService = new UserService();
-
+const userRepository = new UserRepository();
 export const create = async (req, res) => {
   try {
     const { email, password, username } = req.body;
@@ -30,9 +30,14 @@ export const create = async (req, res) => {
 export const signIn = async (req, res) => {
   try {
     const response = await userService.signIn(req.body.email, req.body.password);
+    const userByEmail=await userRepository.getByEmail(req.body.email);
+    const newObj={
+      token:response,
+      userId:userByEmail.id,
+    }
     return res.status(200).json({
       message: "Successfully Signed In",
-      data: response,
+      data: newObj,
       success: true,
       err: {}
     });

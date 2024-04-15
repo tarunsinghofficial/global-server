@@ -3,6 +3,6 @@ import {getByUserId} from "../../controllers/carbonfootprint-controller.js";
 const router=express.Router();
 
 //carbonfootprint routes
-router.get('/get',getByUserId);
+router.post('/get',getByUserId);
 
 export default router;

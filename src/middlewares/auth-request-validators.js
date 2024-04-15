@@ -29,6 +29,8 @@ export const validateSignUpUserAuth=(req,res,next)=>{
 
 export const isAuthenticatedUserAuth=async (req,res,next)=>{
        const response=await userService.isAuthenticatedUserAuth(req.body.jwt_token);
+       console.log("",req.body.jwt_token);
+       console.log("",response);
       if(!response)
       {
         return res.status(400).json({

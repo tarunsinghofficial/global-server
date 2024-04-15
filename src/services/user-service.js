@@ -14,9 +14,9 @@ class UserService {
       // const newJWT = this.createToken({ email: user.email, id: user.id });
       // return newJWT;
       // return user;
-      console.log("", user);
+      //console.log("", user);
       const newJWT =  this.createToken({ email: data.email, id: data.id });
-      console.log("", newJWT);
+      //console.log("", newJWT);
       //const username
      // const userWithToken = { ...user, jwtToken: newJWT };// Add JWT token to the user object
      const userWithToken = {

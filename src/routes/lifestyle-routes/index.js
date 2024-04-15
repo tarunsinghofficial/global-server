@@ -5,6 +5,6 @@ import {isAuthenticatedUserAuth} from "../../middlewares/auth-request-validators
 const router=express.Router();
 
 //lifestyle routes
-router.post('/create',isAuthenticatedUserAuth,checkLifestyleEntry,create);
+router.post('/create',checkLifestyleEntry,create);
 
 export default router;

@@ -31,14 +31,17 @@ export const calculateCarbonFootprint = (lifestyleData) => {
 
     // Carpooling Frequency
     const carpoolingFactor = {
-        never: 1,
-        infrequently: 0.8,
-        occasionally: 0.6,
-        often: 0.4,
-        'very often': 0.2,
-        always: 0
+        never: 0,
+        infrequently: 0.2,
+        occasionally: 0.4,
+        often: 0.6,
+        'very often': 0.8,
+        always: 1
     };
     carbonFootprint *= carpoolingFactor[lifestyleData.carpoolingFrequency];
+
+    // Multiply by 30 to get monthly carbon footprint (assuming a month has 30 days)
+    carbonFootprint *= 30;
 
     return carbonFootprint;
 };

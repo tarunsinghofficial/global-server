@@ -11,7 +11,26 @@ class UserService {
   async create(data) {
     try {
       const user = await this.userRepository.create(data);
-      return user;
+      // const newJWT = this.createToken({ email: user.email, id: user.id });
+      // return newJWT;
+      // return user;
+      console.log("", user);
+      const newJWT =  this.createToken({ email: data.email, id: data.id });
+      console.log("", newJWT);
+      //const username
+     // const userWithToken = { ...user, jwtToken: newJWT };// Add JWT token to the user object
+     const userWithToken = {
+      email: user.email,
+      username: user.username,
+      _id: user._id,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+      __v: user.__v,
+      jwtToken: newJWT
+    };
+      //console.log("", userWithToken);
+      //console.log("", user);
+      return userWithToken;
     } catch (error) {
       console.log("Something Went Wrong In Service Layer");
       console.log(error);

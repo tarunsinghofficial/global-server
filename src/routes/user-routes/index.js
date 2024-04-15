@@ -7,5 +7,5 @@ const router=express.Router();
 router.post('/signup',validateSignUpUserAuth,create);
 router.post('/signin',validateSignInUserAuth,signIn);
 router.get('/isAuthenticated',isAuthenticated);
-router.get('/get',get);
+router.post('/get',get);
 export default router;
